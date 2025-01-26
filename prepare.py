@@ -1,6 +1,6 @@
 from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader
-from langchain.text_splitter import TextSplitter, RecursiveCharacterTextSplitter
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
 DATA_PATH = 'data/'
@@ -10,7 +10,6 @@ def load_pdf(data):
     return documents
 
 documents=load_pdf(data=DATA_PATH)
-# print(len(documents))
 
 def create_chunks(extracted_data):
     text_splitter=RecursiveCharacterTextSplitter(chunk_size=500,
@@ -19,7 +18,6 @@ def create_chunks(extracted_data):
     return text_chunks
 
 text_chunks=create_chunks(extracted_data=documents)
-# print("Length of Text Chunks: ", len(text_chunks))
 
 def get_embedding_model():
     embedding_model=HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
