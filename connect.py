@@ -2,10 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.document_loaders import DirectoryLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEndpoint
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
@@ -20,7 +17,7 @@ def load_llm():
 PROMPT_TEMPLATE = """
 Use the pieces of information provided in the context to answer user's question.
 If you dont know the answer, just say that you dont know, dont try to make up an answer. 
-Dont provide anything out of the given context
+Dont provide anything out of the given context.
 
 Context: {context}
 Question: {question}
